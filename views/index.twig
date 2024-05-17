@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Informations </title>
+</head>
+<body>
+
+    <h1>Informations des Niveaux de Bâtiments</h1>
+    <form >
+        <label >id hotel  :</label>
+        <input type="text" id="id1" n >
+          <label >id chambre:</label>
+
+              <input type="text" id="id"  >
+          
+        <button type="submit"  onclick="afficher()">afficherchambre</button>
+        <button type="submit"  onclick="reserver()">reserver</button>
+    </form>
+
+<script src="/socket.io/socket.io.js"></script>
+    <script>
+       const socket = io(); 
+           name= prompt("Type your name !")
+            function afficher(){
+            var id1= document.getElementById("id1").value
+           
+                    
+                        data ={id1 }
+              socket.emit("afficher",  data);
+    }
+         function reserver(){
+            var id= document.getElementById("id").value
+           
+                    
+                        data ={id,name }
+              socket.emit("reserver",  data);
+    }
+     
+   socket.on("msg",(data)=>{
+        console.log(data)
+        p = document.createElement('p')
+    p.innerText= "chambre reserve"+data
+   
+      
+        document.body.append(p)
+        }) 
+           socket.on("msg1",(data)=>{
+        console.log(data)
+        p = document.createElement('p')
+    p.innerText= "chambre  non reserve"+data
+   
+      
+        document.body.append(p)
+        }) 
+
+    </script>
+</body>
+</html>
+ 
